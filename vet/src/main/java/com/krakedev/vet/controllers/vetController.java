@@ -1,4 +1,4 @@
-package com.krakedev.vet;
+package com.krakedev.vet.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/vet")
-public class helloController {
+public class vetController {
     @GetMapping("/welcome")
     public String hello() {
         return "Welcome to the Veterinary Management System";
