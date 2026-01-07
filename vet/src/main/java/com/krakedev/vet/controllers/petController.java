@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.krakedev.vet.entity.pet;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/pet")
@@ -31,4 +34,11 @@ public class petController {
         java.util.Optional<pet> pet = this.pet.stream().filter(p -> p.getId() == id).findFirst();
         return pet.orElse(null);    
     }
+
+    @PostMapping
+    public pet createPet(@RequestBody pet newPet) {
+        pet.add(newPet);
+        return newPet;
+    }
+    
 }
