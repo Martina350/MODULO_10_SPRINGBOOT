@@ -3,6 +3,7 @@ package com.krakedev.vet.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,4 +42,8 @@ public class petController {
         return newPet;
     }
     
+    @DeleteMapping("/{id}")
+    public void deletePet(@PathVariable int id) {
+        pet.removeIf(p -> p.getId() == id);
+    }
 }
