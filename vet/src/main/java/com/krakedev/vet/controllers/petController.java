@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +24,11 @@ public class petController {
     @GetMapping
     public List<pet> listPets() {
         return pet;
+    }
+
+    @GetMapping("/{id}")
+    public pet getPetById(@PathVariable int id) {
+        java.util.Optional<pet> pet = this.pet.stream().filter(p -> p.getId() == id).findFirst();
+        return pet.orElse(null);    
     }
 }
