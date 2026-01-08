@@ -1,5 +1,6 @@
 package com.krakedev.vet.controllers;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,35 +10,56 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.krakedev.vet.entity.pet;
+import com.krakedev.vet.entity.Pet;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
 @RequestMapping("/api/pet")
-public class petController {
-    private List<pet> pet = new ArrayList<>();
+public class PetController {
+    private List<Pet> pet = new ArrayList<>();
 
-    private petController() {
-        pet.add(new pet(1, "Brownie", "Dog", 5, "Martina"));
-        pet.add(new pet(2, "Lola", "Cat", 5, "Daniela"));
-        pet.add(new pet(3, "Panfleta", "Rabbit", 1, "Abigail"));
+    private PetController() {
+    Pet p1 = new Pet();
+    p1.setId(1);
+    p1.setName("Brownie");
+    p1.setSpecies("Dog");
+    p1.setAge(5);
+    p1.setOwnerName("Martina");
+
+    Pet p2 = new Pet();
+    p2.setId(2);
+    p2.setName("Lola");
+    p2.setSpecies("Cat");
+    p2.setAge(5);
+    p2.setOwnerName("Daniela");
+
+    Pet p3 = new Pet();
+    p3.setId(3);
+    p3.setName("Panfleta");
+    p3.setSpecies("Rabbit");
+    p3.setAge(1);
+    p3.setOwnerName("Abigail");
+
+    pet.add(p1);
+    pet.add(p2);
+    pet.add(p3);
     }
 
     @GetMapping
-    public List<pet> listPets() {
+    public List<Pet> listPets() {
         return pet;
     }
 
     @GetMapping("/{id}")
-    public pet getPetById(@PathVariable int id) {
-        java.util.Optional<pet> pet = this.pet.stream().filter(p -> p.getId() == id).findFirst();
+    public Pet getPetById(@PathVariable int id) {
+        java.util.Optional<Pet> pet = this.pet.stream().filter(p -> p.getId() == id).findFirst();
         return pet.orElse(null);    
     }
 
     @PostMapping
-    public pet createPet(@RequestBody pet newPet) {
+    public Pet createPet(@RequestBody Pet newPet) {
         pet.add(newPet);
         return newPet;
     }
