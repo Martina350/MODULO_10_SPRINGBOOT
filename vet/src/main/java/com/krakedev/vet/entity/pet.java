@@ -22,7 +22,7 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
     @Column(name = "name_pet", nullable = false, length = 100)
     private String name;
     @Column(name = "species", nullable = false, length = 100)

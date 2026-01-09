@@ -22,21 +22,21 @@ public class PetController {
 
     private PetController() {
     Pet p1 = new Pet();
-    p1.setId(1);
+    p1.setId(1L);
     p1.setName("Brownie");
     p1.setSpecies("Dog");
     p1.setAge(5);
     p1.setOwnerName("Martina");
 
     Pet p2 = new Pet();
-    p2.setId(2);
+    p2.setId(2L);
     p2.setName("Lola");
     p2.setSpecies("Cat");
     p2.setAge(5);
     p2.setOwnerName("Daniela");
 
     Pet p3 = new Pet();
-    p3.setId(3);
+    p3.setId(3L);
     p3.setName("Panfleta");
     p3.setSpecies("Rabbit");
     p3.setAge(1);
