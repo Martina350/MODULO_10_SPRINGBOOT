@@ -1,24 +1,46 @@
 package com.krakedev.vet.controllers;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+//import java.time.LocalDate;
+//import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+//import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.krakedev.vet.entity.Pet;
+import com.krakedev.vet.service.PetService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
 @RequestMapping("/api/pet")
+@RequiredArgsConstructor
 public class PetController {
-    private List<Pet> pet = new ArrayList<>();
+    
+    private final PetService petService;
+
+    @PostMapping("/register")
+    public ResponseEntity<?> listPets(@RequestBody Pet pet) {
+        Pet newPet = petService.registerPet(pet);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newPet);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Pet>> listPets() {
+        List<Pet> pets = petService.listPets();
+        return ResponseEntity.ok(pets);
+    }
+
+    /*private final List<Pet> pet = new ArrayList<>();
 
     private PetController() {
     Pet p1 = new Pet();
@@ -67,5 +89,7 @@ public class PetController {
     @DeleteMapping("/{id}")
     public void deletePet(@PathVariable int id) {
         pet.removeIf(p -> p.getId() == id);
-    }
+    }*/
+
+    
 }
