@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 //import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -58,7 +61,36 @@ public class PetController {
                         .body("Pet with id " + id + " not found");
     }
 
-    /*private final List<Pet> pet = new ArrayList<>();
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updatePet(@PathVariable Long id, @RequestBody Pet pet) {
+       try {
+           Pet petUpdated = new Pet();
+           petUpdated.setName(pet.getName());
+           petUpdated.setSpecies(pet.getSpecies());
+           petUpdated.setAge(pet.getAge());
+           petUpdated.setOwnerName(pet.getOwnerName());
+           
+           Pet petBDD = petService.updatePet(id, petUpdated);
+           return ResponseEntity.ok(petBDD);
+       } catch (Exception e) {
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+       }
+    }
+
+     @DeleteMapping("/delete/{id}")
+     public ResponseEntity<?> deletePet(@PathVariable Long id) {
+         try {
+             petService.deletePet(id);
+             return ResponseEntity.ok("Pet with id " + id + " deleted");
+         } catch (Exception e) {
+             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+         }
+     }
+
+
+}
+
+ /*private final List<Pet> pet = new ArrayList<>();
 
     private PetController() {
     Pet p1 = new Pet();
@@ -107,7 +139,4 @@ public class PetController {
     @DeleteMapping("/{id}")
     public void deletePet(@PathVariable int id) {
         pet.removeIf(p -> p.getId() == id);
-    }*/
-
-    
-}
+    }*/   
