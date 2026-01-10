@@ -1,6 +1,7 @@
 package com.krakedev.vet.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -28,12 +29,12 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet findPetById(Long id) {
-        return petRepository.findById(id).orElse(null);
+    public Optional<Pet> findPetById(Long id) {
+        return petRepository.findById(id);
     }
 
     @Override
-    public Pet findPetByName(String name) {
+    public Optional<Pet> findPetByName(String name) {
         return petRepository.findByName(name);
     }
 

@@ -11,7 +11,7 @@ import com.krakedev.vet.entity.Pet;
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Long> {
     Optional<Pet> findById(Long id);
-    Pet findByName(String name);
+    Optional<Pet> findByName(String name);
     Optional<Pet> findByOwnerName(String ownerName);
     Optional<Pet> findByRegisterDate(LocalDate registerDate);
 }
