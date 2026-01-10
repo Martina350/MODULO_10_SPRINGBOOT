@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.krakedev.vet.entity.Pet;
+import com.krakedev.vet.entity.StatusPet;
 import com.krakedev.vet.repository.PetRepository;
 import com.krakedev.vet.service.PetService;
 
@@ -56,5 +57,19 @@ public class PetServiceImpl implements PetService {
         petRepository.findById(id)
         .orElseThrow(() -> new Exception("Pet by ID: " + id + " not found"));
         petRepository.deleteById(id);
+    }
+
+    @Override
+    @SneakyThrows
+    public Pet changePetStatus(Long id, StatusPet statusPet) {
+        Pet pet = petRepository.findById(id)
+        .orElseThrow(() -> new Exception("Pet by ID: " + id + " not found"));
+        pet.setStatusPet(statusPet);
+        return petRepository.save(pet);
+    }
+
+    @Override
+    public List<Pet> findPetByStatus(StatusPet statusPet) {
+        return petRepository.findByStatusPet(statusPet);
     }
 }

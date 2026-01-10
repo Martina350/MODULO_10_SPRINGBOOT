@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.krakedev.vet.entity.Pet;
+import com.krakedev.vet.entity.StatusPet;
 import com.krakedev.vet.service.PetService;
 
 import lombok.RequiredArgsConstructor;
@@ -86,6 +87,22 @@ public class PetController {
              return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
          }
      }
+
+        @PutMapping("/status/{id}")    
+        public ResponseEntity<?> changePetStatus(@PathVariable Long id, @RequestBody StatusPet statusPet) {
+            try {
+                Pet petUpdate = petService.changePetStatus(id, statusPet);
+                return ResponseEntity.ok(petUpdate);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            }
+        }
+
+        @GetMapping("/listStatus/{statusPet}")
+        public ResponseEntity<?> findPetByStatus(@PathVariable StatusPet statusPet) {
+            List<Pet> pets = petService.findPetByStatus(statusPet);
+            return ResponseEntity.ok(pets);
+        }
 
 
 }
